@@ -2,7 +2,16 @@
  const Header=({text})=><h1>{text}</h1>
  const Button=({onSmash,text})=><button onClick={onSmash}>{text}</button>
  const Statistics = (props) =><Button onSmash={props.onSmash} text={props.text}/>
- const StatisticLine=(props)=>{return <div>{props.text} {props.value}</div>}
+ const StatisticLine=(props)=>{return <div>
+  <table >
+    <tbody>
+      <tr>
+        <td>{props.text}</td>
+        <td >{props.value}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>}
  const Condition=({good,neutral,bad,total,avg,positive})=>{
   if(good===0&&neutral===0&&bad ===0){
     return "No Given feedback"
@@ -35,6 +44,11 @@
         <Header text="Statistics"/>
         <Condition good={good} neutral={neutral} bad={bad}
         total={total} avg={avg} positive={positive()}/>
+ 
+
+
+
+
 
       
  </div>

@@ -1,34 +1,41 @@
-const Header1=({text})=><h1>{text}</h1>
-const Header2=({text})=><h2>{text}</h2>
-const Part=({parts})=>{
-  return <div>
-    {parts.map(part=>
-      <p key={part.id} >{part.name} {part.exercises}</p>
-      )}
-  </div>
-
+const Header1 = ({ text }) => <h1>{text}</h1>
+const Header2 = ({ text }) => {
+  //  console.log({text})
+return <div><h2>{text}
+ </h2> </div>
 }
-const Total=({parts})=>{
-  const total=parts.reduce( (sum,order) =>{
-    console.log('what is happening', sum, order)
-     return sum+order.exercises},0)
-  
- return  <h4>total of {total} exercises</h4>
-    
-}
-const Course=({course})=>{
-  return <div>
-    <Header1 text="Web development curriculum"/>
-    <Header2 text={course[0].name}/>
-     <Part parts={course[0].parts}/>
-    <Total parts={course[0].parts}/> 
-    <Header2 text={course[1].name}/>
-    <Part parts={course[1].parts}/>
-    <Total parts={course[1].parts}/> 
-
-
+const Part = ({ parts }) => {
+  const partNames = parts.map(part => part.name)
+//   console.log(partNames)
+  return (
+    <div>
+      {partNames.map((name, index) => (
+        <p key={index}>{name}</p>
+      ))}
     </div>
-
+  )
 }
 
-export default Course
+const Total = ({ parts }) => {
+  const total = parts.reduce((sum, part) => sum + part.exercises, 0)
+  return <h4>Total of {total} exercises</h4>;
+}
+
+const Course = ({ course }) => {
+    console.log({course})
+  return (
+    <div>
+      <Header1 text="Web development curriculum" />
+      {course.map((props) => (
+        <div key={props.id}>
+          <Header2 text={props.name} />
+          
+          <Part parts={props.parts} />
+          <Total parts={props.parts} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default Course;
